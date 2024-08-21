@@ -3,50 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NickGraik</title>
+    <title>Update Notification</title>
     <style>
         body {
-            background-color: #a2a9b0; 
+            background-color: black;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-        }
-        .centered-button {
-            text-align: center;
-        }
-        .centered-button a {
-            text-decoration: none;
-        }
-        .centered-button button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #ff0000;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .centered-button button:hover {
-            background-color: #03662e;
+            font-family: Arial, sans-serif;
+            transition: background-image 1s ease-in-out;
         }
 
-        .centered-button img {
-            display: block;
-            margin: 20px auto 0; 
-            max-width: 100%;
-            height: auto;
-            cursor: pointer;
+        .content {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .clock {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 10px solid white;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .clock::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hand {
+            width: 50%;
+            height: 2px;
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(0deg);
+            transition: transform 0.25s linear;
+        }
+
+        .percentage {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            background-color: #1a1a1a;
+            padding: 15px 40px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #cccccc;
+            border-top: 1px solid #333;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .footer img {
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        #audioContainer {
+            display: none;
+            text-align: center;
+        }
+
+        #audioContainer audio {
+            outline: none;
         }
     </style>
 </head>
 <body>
-    <div class="centered-button">
-        <a href="https://www.crazygames.com/game/scary-maze" target="_blank">
-            <button>HELLO MR GRAIKOUSH</button>
-            <img src="tryme.jpg" alt="Clickable Image">
-        </a>
+    <div class="content" id="content">
+        <h1>Update Windows Software...</h1>
+        <div class="clock">
+            <div class="hand" id="hand"></div>
+        </div>
+        <div class="percentage" id="percentage">0%</div>
     </div>
+
+    <div class="footer" id="footer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo">
+        &copy; 2024 Microsoft. All rights reserved.
+    </div>
+
+    <div id="audioContainer">
+        <audio controls autoplay>
+            <source src="_43Vg0RVod9-Vel8PP5.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        function updateClock(percentage) {
+            const hand = document.getElementById('hand');
+            const percentageText = document.getElementById('percentage');
+            const angle = percentage * 3.6; // 360 degrees / 100%
+            hand.style.transform = `rotate(${angle}deg)`;
+            percentageText.textContent = `${percentage}%`;
+        }
+
+        let percentage = 0;
+        const updateInterval = 100; // 0.25 seconds in milliseconds
+        const totalDuration = 15000; // 15 seconds in milliseconds
+
+        function simulateUpdate() {
+            if (percentage < 100) {
+                percentage += 1;
+                updateClock(percentage);
+                setTimeout(simulateUpdate, updateInterval); // Update every 0.25s
+            } else {
+                completeUpdate();
+            }
+        }
+
+        function completeUpdate() {
+            // Clear the content
+            const content = document.getElementById('content');
+            content.style.display = 'none';
+
+            // Set the background image
+            document.body.style.backgroundImage = 'url(https://via.placeholder.com/1920x1080)';
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+
+            // Display the audio and footer
+            const audioContainer = document.getElementById('audioContainer');
+            audioContainer.style.display = 'block';
+
+            const footer = document.getElementById('footer');
+            footer.style.position = 'fixed';
+            footer.style.bottom = '0';
+            footer.style.width = '100%';
+            footer.style.display = 'block';
+        }
+
+        simulateUpdate();
+    </script>
 </body>
 </html>
