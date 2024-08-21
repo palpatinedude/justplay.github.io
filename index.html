@@ -86,6 +86,13 @@
         #audioContainer audio {
             outline: none;
         }
+
+        #errorMessage {
+            display: none;
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -103,10 +110,14 @@
     </div>
 
     <div id="audioContainer">
-        <audio controls autoplay>
+        <audio controls autoplay onerror="handleAudioError()">
             <source src="_43Vg0RVod9-Vel8PP5.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
+    </div>
+
+    <div id="errorMessage">
+        Error: Unable to play audio.
     </div>
 
     <script>
@@ -119,14 +130,14 @@
         }
 
         let percentage = 0;
-        const updateInterval = 100; // 0.25 seconds in milliseconds
+        const updateInterval = 100; // 0.1 seconds in milliseconds
         const totalDuration = 15000; // 15 seconds in milliseconds
 
         function simulateUpdate() {
             if (percentage < 100) {
                 percentage += 1;
                 updateClock(percentage);
-                setTimeout(simulateUpdate, updateInterval); // Update every 0.25s
+                setTimeout(simulateUpdate, updateInterval); // Update every 0.1s
             } else {
                 completeUpdate();
             }
@@ -151,6 +162,15 @@
             footer.style.bottom = '0';
             footer.style.width = '100%';
             footer.style.display = 'block';
+        }
+
+        function handleAudioError() {
+            const audioContainer = document.getElementById('audioContainer');
+            const errorMessage = document.getElementById('errorMessage');
+
+            audioContainer.style.display = 'none';
+            errorMessage.style.display = 'block';
+            console.error('Unable to play audio.');
         }
 
         simulateUpdate();
