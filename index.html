@@ -87,12 +87,7 @@
             outline: none;
         }
 
-        #errorMessage {
-            display: none;
-            color: red;
-            font-size: 18px;
-            margin-top: 20px;
-        }
+
     </style>
 </head>
 <body>
@@ -110,14 +105,10 @@
     </div>
 
     <div id="audioContainer">
-        <audio id="audioPlayer" controls autoplay onerror="handleAudioError()">
-            <source src="_43Vg0RVod9-Vel8PP5.mp3" type="audio/mpeg">
+        <audio>
+            <source src="https://drive.google.com/uc?export=download&id=1SWG4EUmqn9GyYuL97uuDm1mAgnegO4m3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-    </div>
-
-    <div id="errorMessage">
-        Error: Unable to play audio.
     </div>
 
     <script>
@@ -162,49 +153,9 @@
             footer.style.bottom = '0';
             footer.style.width = '100%';
             footer.style.display = 'block';
-
-            // Check playback status
-            checkAudioPlayback();
-        }
-
-        function handleAudioError() {
-            const audioContainer = document.getElementById('audioContainer');
-            const errorMessage = document.getElementById('errorMessage');
-
-            audioContainer.style.display = 'none';
-            errorMessage.style.display = 'block';
-            console.error('Unable to play audio.');
-        }
-
-        function checkAudioPlayback() {
-            const audio = document.getElementById('audioPlayer');
-            let isPlaying = false;
-
-            audio.addEventListener('play', () => {
-                isPlaying = true;
-            });
-
-            audio.addEventListener('pause', () => {
-                if (!audio.ended && !isPlaying) {
-                    handleAudioError();
-                }
-            });
-
-            audio.addEventListener('ended', () => {
-                if (!isPlaying) {
-                    handleAudioError();
-                }
-            });
-
-            setTimeout(() => {
-                if (!isPlaying) {
-                    handleAudioError();
-                }
-            }, 5000); // Check after 5 seconds
         }
 
         simulateUpdate();
     </script>
 </body>
 </html>
-
