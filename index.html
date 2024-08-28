@@ -3,156 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Notification</title>
+    <title>HEY CUTIE</title>
     <style>
         body {
-            background-color: black;
+            margin: 0;
+            height: 100vh;
+            background-color: red;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            justify-content: center;
             color: white;
             font-family: Arial, sans-serif;
-            transition: background-image 1s ease-in-out;
+            text-align: center;
+            position: relative;
         }
 
         .content {
-            text-align: center;
-            flex-grow: 1;
-        }
-
-        .clock {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 10px solid white;
             position: relative;
-            margin: 80px auto;
+            width: 80%; /* Adjust as needed */
+        }
+            .text-above-image {
+                position: absolute;
+                top: -150px; /* Adjust as needed */
+                width: 100%;
+                font-size: 14px; /* Add a smaller font size */
+            }
+
+        img {
+            width: 20%; 
+            height: auto;
+            display: block;
+            margin: 0 auto; 
+            border: 6px solid black; /* Add a black border */
         }
 
-        .clock::after {
-            content: '';
-            width: 10px;
-            height: 10px;
-            background-color: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .hand {
-            width: 50%;
-            height: 2px;
-            background-color: white;
-            position: absolute;
-            top: 50%;
-            transform-origin: 100%;
-            transform: rotate(0deg);
-            transition: transform 0.25s linear;
-        }
-
-        .percentage {
-            font-size: 24px;
-            margin-top: 10px;
-        }
-
-        .footer {
-            background-color: #1a1a1a;
-            padding: 15px 40px;
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            color: #cccccc;
-            border-top: 1px solid #333;
+        footer {
             position: absolute;
             bottom: 0;
-        }
-
-        .footer img {
-            height: 20px;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-
-        #audioContainer {
-            display: none;
-            text-align: center;
-        }
-
-        #audioContainer iframe {
             width: 100%;
-            height: 166px;
-            border: none;
+            height: 100px; /* Adjust as needed */
+            overflow: hidden;
+            background-color: black; /* Changed to black */
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .moving-text {
+            position: relative;
+            white-space: nowrap;
+            animation: moveText 10s linear infinite;
+        }
+
+        @keyframes moveText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
     </style>
 </head>
 <body>
-    <div class="content" id="content">
-        <h1>Update Windows Software...</h1>
-        <div class="clock">
-            <div class="hand" id="hand"></div>
+    <div class="content">
+        <div class="text-above-image">
+            <h1>The fundamental particles of my heart are in a state of quantum entanglement with you, and I miss your wave function.</h1>
         </div>
-        <div class="percentage" id="percentage">0%</div>
+        <img src="nikos.jpg" alt="Centered Image">
     </div>
-
-    <div class="footer" id="footer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo">
-        &copy; 2024 Microsoft. All rights reserved.
-    </div>
-
-    <div id="audioContainer">
-        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/alex_support/43vg0rvod9-vel8pp5" frameborder="no" allow="autoplay"></iframe>
-    </div>
-    
-    <script>
-        function updateClock(percentage) {
-            const hand = document.getElementById('hand');
-            const percentageText = document.getElementById('percentage');
-            const angle = percentage * 3.6; // 360 degrees / 100%
-            hand.style.transform = `rotate(${angle}deg)`;
-            percentageText.textContent = `${percentage}%`;
-        }
-
-        let percentage = 0;
-        const updateInterval = 100; // 0.1 seconds in milliseconds
-        const totalDuration = 15000; // 15 seconds in milliseconds
-
-        function simulateUpdate() {
-            if (percentage < 100) {
-                percentage += 1;
-                updateClock(percentage);
-                setTimeout(simulateUpdate, updateInterval); // Update every 0.1s
-            } else {
-                completeUpdate();
-            }
-        }
-
-        function completeUpdate() {
-            // Clear the content
-            const content = document.getElementById('content');
-            content.style.display = 'none';
-
-            // Set the background image
-            document.body.style.backgroundImage = 'url(https://via.placeholder.com/1920x1080)';
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundPosition = 'center';
-
-            // Display the audio and footer
-            const audioContainer = document.getElementById('audioContainer');
-            audioContainer.style.display = 'block';
-
-            const footer = document.getElementById('footer');
-            footer.style.position = 'fixed';
-            footer.style.bottom = '0';
-            footer.style.width = '100%';
-            footer.style.display = 'block';
-        }
-
-        simulateUpdate();
-    </script>
+    <footer>
+        <div class="footer-content">
+            <div class="moving-text">
+                <p>I MISS YOU WHEN WE ARE GOING TO WATCH DAREDEVIL???</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
